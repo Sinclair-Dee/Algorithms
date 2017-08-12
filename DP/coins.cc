@@ -30,7 +30,7 @@ int main(){
 	            min[i] = min[i] < min[i-v[j]] + 1? min[i] : min[i-v[j]]+1;
 	    }
 	}
-
+//内循环展开的写法
 //	{
 //		min[i] = min[i-1] + 1;
 //		if(i>2) min[i] = min[i] < min[i-3]+1? min[i] :  min[i-3]+1;
