@@ -10,6 +10,7 @@
 
 #include <iostream>
 #include<vector>
+#define COINS 3
 using namespace std;
 int main(){
 	int s;
@@ -19,12 +20,12 @@ int main(){
 	//状态：min[i]
 	//状态方程：min[i] = Min{min[i-vj] +1}
 	//其中vj分别为1元，3元,5元和7元的硬币
-	int v[4] = {1,3,5,7};
+	int v[COINS] = {1,3,5};
 	//两层循环实现状态方程
 	min[0] = 0;
 	for(int i = 1; i<s+1;i++){
 	    min[i] = min[i-1]+1;
-	    for(int j = 1;j<4;j++){
+	    for(int j = 1;j<COINS;j++){
 	        if(i >= v[j])
 	            min[i] = min[i] < min[i-v[j]] + 1? min[i] : min[i-v[j]]+1;
 	    }
