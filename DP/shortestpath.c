@@ -6,11 +6,11 @@
 //如果它们间有边， 则计算从结点1到未计算结点的最短路径。
 //狄新凯
 //2017/8/13
+//Status:Compiled!!!
 //********************************************************************************//
 //必要头文件
 #include "stdio.h"    
 #include "stdlib.h"   
-//#include "io.h"  
 #include "math.h"  
 #include "time.h"
 //必要宏定义
@@ -130,6 +130,7 @@ int ShortestPath_Dijkstra(MGraph *G, VertexType ver0, VertexType verN,Patharc *P
 /************************************************/
 void main(){
 	//定义指针以及空间申请。
+	//这个地方要注意，吃过很多亏！
     MGraph *G = NULL;
 	Patharc *P = NULL;
 	ShortPathTable  *D = NULL;
