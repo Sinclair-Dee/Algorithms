@@ -15,7 +15,7 @@
 using namespace std;
 
 int lis(int A[], int n){
-    int *d = new int[n];
+    int *d = new int[n];//堆栈帧
     int len =1;
     for(int i=0; i<n; i++){
         d[i] = 1;
