@@ -3,6 +3,7 @@
 //算法思想：动态规划
 //狄新凯
 //2017/8/16
+//status:compiled perfect!!!
 /****************************************/
 
 //必要头文件
@@ -83,17 +84,60 @@ void ShortestPath_Floyd(MGraph *G, Patharc *P, ShortPathTable *D){
     int i,j,k;
     /* 初始化D与P */
     for(i=0; i<G->numNodes; i++)
-        for(j=0; j=G->numNodes; j++){
+        for(j=0; j<G->numNodes; j++){
             (*D)[i][j] = G->Arc[i][j];
             (*P)[i][j] = j;
         }
     /* 依据状态方程更新D与P */ 
     for(k=0; k<G->numNodes; k++)
         for(i=0; i<G->numNodes; i++)
-            for(j=0; j=G->numNodes; j++){//如果经过下标为k顶点路径比原两点间路径更短
+            for(j=0; j<G->numNodes; j++){//如果经过下标为k顶点路径比原两点间路径更短
                 if((*D)[i][j] > (*D)[i][k] + (*D)[k][j]){
                     (*D)[i][j] = (*D)[i][k] + (*D)[k][j];//将当前两点间权值设为更小的一个 
                     (*P)[i][j] = k;                //路径设置为经过下标为k的顶点
                 }
             }
+}
+
+/************************************************/
+//打印程序
+//PathPrint(ShortPathTable* P)
+/************************************************/
+void PathPrint(int i, int j, ShortPathTable* P){
+	int k = (*P)[i][j];
+	//这个地方用if判断，不能用while,会在第一次就陷入死循环中。切记！切记！
+	//注意控制递归的条件
+	if((*P)[i][k] != k){//前部分i->k的终点是k,则终止递归。
+		PathPrint(i,  k, P); 
+		printf(" --> %d ",k);//注意不要重复打印！
+	}
+    if(k != j) //k = j,后半部分终点已经是j,则终止递归。
+		PathPrint(k,  j, P);   
+}
+/************************************************/
+//test main
+/************************************************/
+void main(){
+	//定义指针以及空间申请。
+	//这个地方要注意，吃过很多亏！
+    MGraph *G = NULL;
+	Patharc *P = NULL;
+	ShortPathTable  *D = NULL;
+	G = (MGraph*)malloc(sizeof(MGraph));
+	P = (Patharc*)malloc(sizeof(Patharc));
+	D = (ShortPathTable*)malloc(sizeof(ShortPathTable));
+
+    CreateMGraph(G);
+    ShortestPath_Floyd(G, P, D);
+    printf("最短路径和权值:\n\n");
+    for(int i=0; i<G->numNodes; i++)
+        for(int j=i+1; j<G->numNodes; j++){
+            printf("%d到%d：%d\n", i,  j, (*D)[i][j]);
+			printf("路径为：%d",i);
+            PathPrint(i, j, P);
+			printf(" --> %d", j);
+			printf("\n");
+        }
+	free(G); free(P); free(D);
+	G = NULL; 	P = NULL; 	D = NULL;
 }
