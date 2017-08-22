@@ -1,27 +1,27 @@
-
 /************************************
 //狄新凯
 //最大子序列和问题
 //参考：http://conw.net/archives/9/
 //最后一种优化，单独一个文件
+//时间复杂度O(N),空间复杂度O(1)
+//同时也是代码量最小的一种算法！！！
 ************************************/
 #include<iostream>
 using namespace std;
-//N是数组长度，num是待计算的数组，放在全局区是因为可以开很大的数组
-int N, num[1024];
+
 int main(){
-    cout<<"输入数组大小:";
-    cin>>N;
-    cout<<"输入数组:"<<endl;
-    for(int i = 0; i <N; i++){
-        cin>>num[i];
+    int N, num;
+    int sum, max, lmin;
+    cout<<"输入数组大小:";  cin>>N;
+    cout<<"输入数组:"<<endl; cin>>sum;
+    max = 0;
+    lmin = sum < 0 ? sum : 0; 
+    for(int i = 1; i < N; i++){
+        cin>>num;
+        sum += num;//到i的累积
+        max = sum - lmin > max ? sum - lmin : max;//更新最大序列和 
+        lmin = sum < lmin ? sum : lmin;
     }
-    //int ans = vio_solution();
-    //int ans = vio_opti_solution();
-    //int ans = DandC_solution();
-    //int ans = DP_solution();
-    int ans = Opti_On1();
-    //int ans = Opti_On2();
-    cout<<ans;
+    cout<<max;
     return 0;
 }
