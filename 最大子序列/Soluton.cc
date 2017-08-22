@@ -118,11 +118,23 @@ int DP_solution(){
 //其他两种优化
 //Opti_On1；
 //我们已知一个sum数组，sum[i]表示第1个数到第i个数的和，于是sum[j] - sum[i-1]表示第i个数到第j个数的和。
+//分析以第n个数为结尾的最大子数列和有什么特点？假设这个子数列的起点是m，于是结果为sum[n] - sum[m-1]。
+//  并且，sum[m]必然是sum[1],sum[2]...sum[n-1]中的最小值！
+//如果在维护计算sum数组的时候，同时维护之前的最小值,那么答案也就出来了！为了节省内存，我们还是只用一个num数组
+
 //Opti_On2；
 //算法的时间复杂度为：O(N)
 ************************************/
 int Opti_On1(){
-    
+    int lmin = 0;//最小值
+    int ans = num[0];
+    lmin = num[0] - lmin < lmin? num[0] - lmin : lmin;
+    for(int i = 1; i < N; i++){
+       num[i] += num[i-1];//前i个数的和
+       ans = num[i] - lmin > ans ? num[i] - lmin : ans;//更新最大序列和
+       lmin = num[i] < lmin ? num[i] : lmin;//更新最小序列和，注意顺序，需要更新最小序列和的时候要下一个周期才能用上！
+    }
+    return ans;
 }
 
 int Opti_On2(){
@@ -145,8 +157,8 @@ int main(){
     //int ans = vio_opti_solution();
     //int ans = DandC_solution();
     //int ans = DP_solution();
-    //int ans = Opti_On1();
+    int ans = Opti_On1();
     //int ans = Opti_On2();
-    //cout<<ans;
+    cout<<ans;
     return 0;
 }
