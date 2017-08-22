@@ -5,6 +5,7 @@ KMP算法
 参考：
 (1)大话数据结构
 (2)http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html
+(3)http://jim8757.iteye.com/blog/2060047
 **************************************/
 
 #include<iostream>
