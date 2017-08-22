@@ -8,7 +8,11 @@
 ************************************/
 #include<iostream>
 using namespace std;
-
+//Main函数
+//testbench
+//8
+//-2 6 -1 5 4 -7 2 3
+//ans = 14
 int main(){
     int N, num;
     int sum, max, lmin;
