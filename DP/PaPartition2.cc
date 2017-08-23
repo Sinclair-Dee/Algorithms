@@ -2,6 +2,10 @@
  * leetcode
  * 132. Palindrome Partitioning II
  * 2017/8/23
+ * 参考：
+ * http://blog.csdn.net/jin_kwok/article/details/51423222
+ * http://www.cnblogs.com/ganganloveu/p/3982561.html
+ * http://blog.csdn.net/yutianzuijin/article/details/16850031
  * **********************************/
 
 /***********************************************************************
