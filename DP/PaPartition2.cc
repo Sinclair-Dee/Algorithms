@@ -31,5 +31,7 @@ public:
  * TEST-MAIN
  * **********************************/
 int main(){
+ Solution solution;
+ 
     
 }
