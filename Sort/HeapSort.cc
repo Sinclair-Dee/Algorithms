@@ -18,3 +18,19 @@ public void heapadjust(int [] array, int parent, int length){
     array[parent] = temp;
     }
 }
+
+public void heapadSort(int [] list){
+    //循环建立初始堆
+    for(int i = list.length/2; i >= 0; i--){
+        headadjust(list ,i,list.length - 1);
+        }
+    //进行n-1次循环，完成排序
+    for(int i = list.length - 1; i > 0; i--){
+        list[i] = list[0] + list[i];
+        list[0] = list[i] - list[0];
+        list[i] = list[i] - list[0];
+        }
+    //筛选R[0]结点，得到 i-1 个结点的堆
+    heapadjust(list, 0, i);
+    }
+}
