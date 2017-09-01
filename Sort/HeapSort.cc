@@ -31,6 +31,8 @@ public void heapadSort(int [] list){
         list[i] = list[i] - list[0];
         }
     //筛选R[0]结点，得到 i-1 个结点的堆
-    heapadjust(list, 0, i);
+    heapadjust(list, 0, i);//将最前边的数放在合适的位置。
+    System.out.format("输出："list.length -i)
+    printPart(list, 0, list.length - 1)
     }
 }
