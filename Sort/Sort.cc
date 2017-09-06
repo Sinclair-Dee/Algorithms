@@ -183,8 +183,10 @@ void HeapSort(SqList *L){
  void Merge(int SR[], int TR[], int i, int m, int n){
    int j, k, l;
    for(j = m + 1, k = i; i <= m && j <= n; k++){//i和j跟踪前后两部分，k跟踪归并后的TR中的元素。k从i开始。
-     if(SR[i] < SR[j]) TR[k] = SR[i++];
-     else TR[k] = SR[j++];
+     if(SR[i] < SR[j]) 
+        TR[k] = SR[i++];
+     else 
+        TR[k] = SR[j++];
    }
    if(i <= m){
      for(l = 0; l < m-i; l++){
@@ -198,19 +200,22 @@ void HeapSort(SqList *L){
    }
  }
   //将SR[s..t] 归并排序为TR1[s..t]。
+  //注意对递归退出的控制。
  void MSort(int SR[], int TR1[], int s, int t){
-   //边界条件处理
-   if(s == t) TR1[s] = SR[s];//当只还剩下一个记录可以归并时，直接将SR赋给TR。(最后都会递归到这个地方。)
-   //递归部分
-   int m = (s + t)/2;
-   int TR2[MAXSIZE + 1];
-   MSort(SR, TR2, s, m);     //前半部分归并排序
-   MSort(SR, TR2, m + 1, t); //后边部分归并排序
-   Merge(TR2, TR1, s, m, t); //排好序的前后两部分合并。
- }
+   if(s == t){//边界条件处理
+       TR1[s] = SR[s];//当只还剩下一个记录可以归并时，直接将SR赋给TR。(最后都会递归到这个地方。)  
+   }
+   else{//递归部分
+        int m = (s + t)/2;
+        int TR2[MAXSIZE + 1];
+        MSort(SR, TR2, s, m);     //前半部分归并排序
+        MSort(SR, TR2, m + 1, t); //后边部分归并排序
+        Merge(TR2, TR1, s, m, t); //排好序的前后两部分合并。
+   }
+   }
  //归并排序,为了使用同一的参数 SqList *L，里边只调用一个函数.
  void MergeSort(SqList* L){
-   MSort(L->r, L->r, 1, L->length);
+   MSort(L->r, L->r, 1, L->length - 1);
  }
  
 /*******************************************************************************
@@ -231,7 +236,8 @@ int main(){
   //SelectSort(L);
   //InserSort(L);
   //ShellSort(L);
-  HeapSort(L);
+  //HeapSort(L);
+  MergeSort(L);
   cout<<"排序后的结果:"<<endl;
   for(int i = 1; i < L->length; i++){
   cout<<L->r[i]<<" ";
