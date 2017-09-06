@@ -146,7 +146,7 @@ void bubblesort2(SqList *L){
  //调整 L->r[s]的关键字使得L->r[s..m]成为一个大顶堆
 void HeapAdjust(SqList *L, int s, int m){
    int temp = L->r[s];
-   for(int j = 2*s; j < m; j *= 2){//沿着关键字较大的孩子结点向下筛选
+   for(int j = 2*s; j < m; j *= 2){//沿着关键字较大的孩子结点向下筛选,注意 j 的变化。
      if(L->r[j] < L->r[j+1]) j++;//左右孩子中较大的
      if(L->r[j] < temp) break;//若该条件成立，则temp应该插在s位置上，跳出循坏执行
      L->r[s] = L->r[j]; //若temp不当前最大的，把较大的孩子插在s上，从这个孩子开始再往下筛选。
