@@ -146,7 +146,7 @@ void bubblesort2(SqList *L){
  //调整 L->r[s]的关键字使得L->r[s..m]成为一个大顶堆
 void HeapAdjust(SqList *L, int s, int m){
    int temp = L->r[s];
-   for(int j = 2*s; j < m; j++){//沿着关键字较大的孩子结点向下筛选
+   for(int j = 2*s; j < m; j *= 2){//沿着关键字较大的孩子结点向下筛选
      if(L->r[j] < L->r[j+1]) j++;//左右孩子中较大的
      if(L->r[j] < temp) break;//若该条件成立，则temp应该插在s位置上，跳出循坏执行
      L->r[s] = L->r[j]; //若temp不当前最大的，把较大的孩子插在s上，从这个孩子开始再往下筛选。
@@ -156,12 +156,12 @@ void HeapAdjust(SqList *L, int s, int m){
  }
  void HeapSort(SqList *L){
    //把初始化为一个大定堆
-   for(int i = length/2; i > 0; i--){//实践证明i从大到小遍历较好
-     HeapAdjust(L, i, L->length);
+   for(int i = (L->length-1)/2; i > 0; i--){//实践证明i从大到小遍历较好
+     HeapAdjust(L, i, L->length - 1);
    }
    //每次输出堆的顶
-   for(int j = L-length - 1; j > 1 j--){
-     swap(L, 1, j)//将堆记录和当前未经排序的子序列的最后一个记录交换，j跟踪的是最后一个记录的标号 
+   for(int j = L->length - 1; j > 1; j--){
+     swap(L, 1, j);//将堆记录和当前未经排序的子序列的最后一个记录交换，j跟踪的是最后一个记录的标号 
      HeapAdjust(L, 1, j - 1); //剩余的部分再调节成大顶堆，只需要调整第一个数就可以。
    }
  }
