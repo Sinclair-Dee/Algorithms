@@ -180,7 +180,7 @@ void HeapSort(SqList *L){
  ******************************************************************************/
   //将有序的SR[i..m]和SR[m+1..n]归并为有序的TR[i..n]。
   //书中循环用了for，实际编程中发现用while显得更加优雅，见merge.cc。
- void Merge(int SR[], int TR[], int i, int m, int n){
+  /*void Merge1(int SR[], int TR[], int i, int m, int n){
    int j, k, l;
    for(j = m + 1, k = i; i <= m && j <= n; k++){//i和j跟踪前后两部分，k跟踪归并后的TR中的元素。k从i开始。
      if(SR[i] < SR[j]) 
@@ -189,16 +189,37 @@ void HeapSort(SqList *L){
         TR[k] = SR[j++];
    }
    if(i <= m){
-     for(l = 0; l < m-i; l++){
-        TR[k++] = SR[i++];
+     for(l = 0; l <= m-i; l++){
+        TR[k+1] = SR[i+1];
      }
    }
    if(j <= n){
-     for(l = 0; l < n-j; l++ ){
-       TR[k++] = SR[j++];
+     for(l = 0; l <= n-j; l++ ){
+       TR[k+1] = SR[j+1];
      }
    }
  }
+ *///这段代码和下边的代码一模一样，但是就是不能运行，可能发生了灵异事件。
+ void Merge(int SR[],int TR[],int i,int m,int n){
+	int j,k,l;
+	for(j=m+1,k=i;i<=m && j<=n;k++)	/* 将SR中记录由小到大地并入TR */
+	{
+		if (SR[i]<SR[j])
+			TR[k]=SR[i++];
+		else
+			TR[k]=SR[j++];
+	}
+	if(i<=m)
+	{
+		for(l=0;l<=m-i;l++)
+			TR[k+l]=SR[i+l];		/* 将剩余的SR[i..m]复制到TR */
+	}
+	if(j<=n)
+	{
+		for(l=0;l<=n-j;l++)
+			TR[k+l]=SR[j+l];		/* 将剩余的SR[j..n]复制到TR */
+	}
+}
   //将SR[s..t] 归并排序为TR1[s..t]。
   //注意对递归退出的控制。
  void MSort(int SR[], int TR1[], int s, int t){
@@ -218,6 +239,7 @@ void HeapSort(SqList *L){
    MSort(L->r, L->r, 1, L->length - 1);
  }
  
+ //不用递归的实现方式。
 /*******************************************************************************
  * TEST main
  * 使用固定的数组r
