@@ -13,6 +13,7 @@ The first line of the input file contains two integer numb ers N and K, separate
 ## Output
 Write to the output file the maximal length (in meters) of the pieces that Cable Master may cut from the cables in the stock to get the requested number of pieces. The number must be written with a centimeter precision, with exactly two digits after a decimal point. 
 If it is not possible to cut the requested number of pieces each one being at least one centimeter long, then the output file must contain the single number "0.00" (without quotes).
+
 ## Sample Input
 4 11
 8.02
