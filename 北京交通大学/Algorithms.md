@@ -1,4 +1,32 @@
+---
+
+title: Algorithms Notes
+date: 2017-09-23 20:44:00
+
+---
+
 # Introduction
+
+算法复杂性
+
+        时间/空间复杂性、可计算性基本概念
+
+枚举算法
+
+        最基础但很重要的算法思维  — 大道至简
+分治算法
+
+        合并排序、快速排序、二分查找、MapReduce
+动态规划算法
+
+        矩阵连乘、0-1背包问题、最长公共子序列、 隐马尔科夫链
+贪心算法
+
+        哈夫曼编码、最小生成树、单源最短路径、 马尔科夫随机场
+搜索算法
+
+        回溯、分支限界、启发式搜索、蒙特卡罗搜索
+
 
 ### Computer and problem solving
 
@@ -287,6 +315,8 @@ NP-complete：满足两点：
 # Enumeration
 
 # Recursion and divide-conquer
+
+![逆序对](http://owqf0jwjh.bkt.clouddn.com/%E9%80%86%E5%BA%8F%E5%AF%B9.jpg)
 
 # Dynamic planning
 
